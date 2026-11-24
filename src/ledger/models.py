@@ -1,7 +1,7 @@
 from enum import Enum
-from pydantic import BaseModel, Field, field_validator, ConfigDict
 from decimal import Decimal
 from datetime import datetime, timezone
+from pydantic import BaseModel, Field, field_validator, ConfigDict
 
 class AccountType(Enum):
     SAVINGS = "Savings"
@@ -27,6 +27,6 @@ class Transaction(BaseModel):
 
     transaction_id: str
     transaction_type: TransactionType
-    amount: Decimal = Field(Decimal("0"), gt=0)
+    amount: Decimal = Field(gt=0)
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     description: str | None = None
